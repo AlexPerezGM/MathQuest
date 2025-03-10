@@ -1,9 +1,6 @@
 Proyecto educativo....
 
-Consiste en juego plataforma 2D donde controlas un pequeño personaje el cual tiene que adentrase en varios niveles, recoger monedas, y derrotas enemigos. 
-La mecanica que utiliza este juego para derrotar a los enemigos es algo diferente, ya que al colisionar con el enemigo nos saldra una pequeña UI que nos hara una pregunta matematica,
-dependiendo del resultado correcto o incorrecto, el enemigo morira o el jugador recivira daño respectivamente. 
-
-Ademas que para abrir cofres y las puertas que nos llevaran a otros niveles debemos realizar el mismo proceso, pero si nos equivocamos no recibiremos ningun tipo de daño...
-
-Los controles de juego son basicos, las flechas de izquierda y derecha para movernos y la tecla de espacio para saltar. 
+Consiste en un juego de plataformas 2D donde controlas a un pequeño personaje el cual tiene que entrar en varios niveles, recoger monedas y derrotar enemigos usando las matemáticas. La mecánica que utiliza este juego para derrotar a los enemigos es algo diferente, ya que al colisionar con el enemigo nos saldrá una pequeña UI que nos hará una pregunta matemática, dependiendo del resultado correcto o incorrecto, el enemigo morirá o el jugador recibirá daño respectivamente.
+Además, que para abrir cofres y las puertas que nos llevarán a otros niveles debemos realizar el mismo proceso, pero si nos equivocamos no recibiremos ningún tipo de daño...
+Los controles de juego son básicos, las flechas de izquierda y derecha para movernos y la tecla de espacio para saltar.
+El jugador debe adentrarse en cada nivel y derrotar cada enemigo, abrir los cofres y llegar hasta las puertas al final de cada mundo, al llegar a la ultima puerta y lograr abrirla habremos ganado el juego y tendremos la oportunidad de volver a reiniciar el juego.

@@ -1,0 +1,226 @@
+[gd_scene load_steps=18 format=3 uid="uid://cv655inxh2scq"]
+
+[ext_resource type="Texture2D" uid="uid://bildgre435eqc" path="res://Recursos/16x16 2D Platformer - Programmer Art/Animations/Player/Player - Sprite sheet.png" id="1_1brjv"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_katr6"]
+[ext_resource type="FontFile" uid="uid://cn8xdnxhptbvh" path="res://Recursos/Fuentes/ArcadeClassic.ttf" id="3_1b7sw"]
+[ext_resource type="AudioStream" uid="uid://c3jtfbbn3xrrt" path="res://Recursos/Sound/cartoon-jump-6462.mp3" id="3_ndf5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_786qs"]
+size = Vector2(10, 15)
+
+[sub_resource type="Animation" id="Animation_7u07p"]
+resource_name = "Dano"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(23, 0), Vector2i(24, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ryhnb"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_x4jke"]
+resource_name = "Muerte"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26]
+}
+
+[sub_resource type="Animation" id="Animation_orsew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(24, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_du4pj"]
+resource_name = "Salto"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_tgqm2"]
+resource_name = "Wark"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_78i7y"]
+_data = {
+"Dano": SubResource("Animation_7u07p"),
+"Idle": SubResource("Animation_ryhnb"),
+"Muerte": SubResource("Animation_x4jke"),
+"RESET": SubResource("Animation_orsew"),
+"Salto": SubResource("Animation_du4pj"),
+"Wark": SubResource("Animation_tgqm2")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_fhxua"]
+font = ExtResource("3_1b7sw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_sg086"]
+font = ExtResource("3_1b7sw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_6xupb"]
+font = ExtResource("3_1b7sw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_4meoj"]
+font = ExtResource("3_1b7sw")
+
+[sub_resource type="GDScript" id="GDScript_jn550"]
+script/source = "extends Camera2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+"
+
+[node name="Player" type="CharacterBody2D" groups=["jugador"]]
+position = Vector2(-153, -21)
+scale = Vector2(1.1, 1.1)
+collision_mask = 31
+platform_floor_layers = 4294967044
+platform_wall_layers = 4
+script = ExtResource("1_katr6")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(222, 113)
+texture = ExtResource("1_1brjv")
+hframes = 27
+frame = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(222, 113.5)
+shape = SubResource("RectangleShape2D_786qs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_78i7y")
+}
+
+[node name="PlayerGUI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerGUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+
+[node name="MonedaLabel2" type="Label" parent="PlayerGUI/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Monedas: "
+label_settings = SubResource("LabelSettings_fhxua")
+
+[node name="MonedaLabel" type="Label" parent="PlayerGUI/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+label_settings = SubResource("LabelSettings_sg086")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerGUI"]
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 50.0
+offset_bottom = 46.0
+scale = Vector2(0.5, 0.5)
+
+[node name="VidaLabel" type="Label" parent="PlayerGUI/HBoxContainer2"]
+layout_mode = 2
+text = "Vida: "
+label_settings = SubResource("LabelSettings_6xupb")
+
+[node name="VidaLabel2" type="Label" parent="PlayerGUI/HBoxContainer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_4meoj")
+
+[node name="Salto" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ndf5t")
+volume_db = -20.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2(241, 158)
+offset = Vector2(0, -70)
+position_smoothing_enabled = true
+drag_right_margin = 1.0
+drag_bottom_margin = 0.0
+script = SubResource("GDScript_jn550")

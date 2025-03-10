@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkudq85dy6jqm"]
+
+[ext_resource type="Script" path="res://Onjetos/balas.gd" id="1_fdni6"]
+[ext_resource type="Texture2D" uid="uid://dhrmawx8qcytv" path="res://Recursos/Enemis/LanzaGuisantes/Bullet.png" id="1_mgtam"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6c2ud"]
+radius = 4.0
+
+[node name="Balas" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_fdni6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mgtam")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6c2ud")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

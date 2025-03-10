@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://c6r464l0u3tga"]
+
+[ext_resource type="Script" path="res://Player/lanzaguisantes.gd" id="1_xfy4n"]
+[ext_resource type="Texture2D" uid="uid://cuhqcjkfqohqn" path="res://Recursos/Enemis/LanzaGuisantes/Attack (44x42).png" id="2_cdki7"]
+[ext_resource type="PackedScene" uid="uid://bkudq85dy6jqm" path="res://Onjetos/balas.tscn" id="2_qjjxg"]
+[ext_resource type="FontFile" uid="uid://cn8xdnxhptbvh" path="res://Recursos/Fuentes/ArcadeClassic.ttf" id="4_l2xjc"]
+
+[sub_resource type="Animation" id="Animation_3jf23"]
+resource_name = "Disparar"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_m7vj3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_67m53"]
+_data = {
+"Disparar": SubResource("Animation_3jf23"),
+"RESET": SubResource("Animation_m7vj3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sg8q4"]
+size = Vector2(20, 37)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f8rte"]
+font = ExtResource("4_l2xjc")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvlrv"]
+size = Vector2(19.4118, 37.1765)
+
+[node name="Lanzaguisantes" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
+collision_layer = 3
+collision_mask = 13
+script = ExtResource("1_xfy4n")
+bala = ExtResource("2_qjjxg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_67m53")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cdki7")
+hframes = 8
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 2.5)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_sg8q4")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 10.5882)
+target_position = Vector2(-700, 0)
+
+[node name="Spawn_bala" type="Marker2D" parent="."]
+position = Vector2(-13.3333, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.88235
+offset_top = -24.7059
+offset_right = 83.1176
+offset_bottom = -1.70588
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_f8rte")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5.58824, 2.58824)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_hvlrv")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://bm0g77ri34r7n"]
+
+[ext_resource type="Script" path="res://Player/Enemigo.gd" id="1_ai0m6"]
+[ext_resource type="Texture2D" uid="uid://dxd8qa8niwh7t" path="res://Recursos/16x16 2D Platformer - Programmer Art/Animations/Walking Enemy/Walking Enemy - Sprite sheet.png" id="2_qjjah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_533hk"]
+size = Vector2(26, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7i81"]
+size = Vector2(9.5, 13)
+
+[sub_resource type="Animation" id="Animation_gr16v"]
+resource_name = "Idle"
+length = 0.45
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_pmao7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_bsptn"]
+resource_name = "Caminar"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_orcfd"]
+resource_name = "Morir"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 28]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3e2y"]
+_data = {
+"Caminar": SubResource("Animation_bsptn"),
+"Idle": SubResource("Animation_gr16v"),
+"Morir": SubResource("Animation_orcfd"),
+"RESET": SubResource("Animation_pmao7")
+}
+
+[node name="Enemigo" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 7
+platform_floor_layers = 4294967044
+platform_wall_layers = 4
+script = ExtResource("1_ai0m6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(197, 84)
+texture = ExtResource("2_qjjah")
+hframes = 29
+frame = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="Sprite2D"]
+position = Vector2(5, 3)
+target_position = Vector2(0, 12)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 161.0
+offset_top = 59.0
+offset_right = 319.0
+offset_bottom = 95.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(205, 85)
+shape = SubResource("RectangleShape2D_533hk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(197.25, 84.5)
+shape = SubResource("RectangleShape2D_x7i81")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x3e2y")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

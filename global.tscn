@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwxsg02t13rpx"]
+
+[ext_resource type="Script" path="res://Global.gd" id="1_f6fg1"]
+[ext_resource type="AudioStream" uid="uid://d32a1wifb85iu" path="res://Recursos/Sound/coin-recieved-230517.mp3" id="2_grd3i"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_f6fg1")
+
+[node name="Moneda" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_grd3i")
+volume_db = -30.0
+max_distance = 9e+06
